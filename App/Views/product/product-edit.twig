@@ -1,0 +1,99 @@
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1>{{ __( product.id > -1 ? 'edit-product' : 'add-product' ) }}</h1>
+
+            <form method="POST">
+                <input type="hidden" name="id" value="{{ product.id }}" />
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">{{ __("name") }}</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="name"  value="{{ product.name }}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-form-label">
+                        <label  class="col-form-label">{{ __("price") }}</label>
+                        <small> ( Bez dph )</small>
+                    </div>
+
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control"  placeholder="{{ __("price") }}" name="price" step="0.01" min="0" value="{{ product.price }}"  >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">{{ __("type") }}</label>
+                    <div class="col-sm-10">
+                        <select name="type" class="form-control w-100">
+                            {% for type in types %}
+                                {% set selected = '' %}
+                                {% if (type[0]) == product.type %}
+                                    {% set selected = 'selected' %}
+                                {% endif %}
+                                <option value="{{ type.id }}" {{ selected }}>{{ __(type.name) }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label">{{ __("tax") }}</label>
+                    <div class="col-sm-10">
+                        <select name="tax_id" class="form-control w-100">
+                            {% for tax in taxes %}
+                                {% set selected = '' %}
+                                {% if (tax[0]) ==  product.tax_id  %}
+                                    {% set selected = 'selected' %}
+                                {% endif %}
+                                <option value="{{ tax.id }}" {{ selected }}>{{ __(tax.name) }} {{ tax.value }}%</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="d-none d-md-flex col-md-2 col-form-label">{{ __("position") }}</label>
+                    <div class="col-md-10">
+                        <div class="row" style="    width: calc(100% + 15px);    margin-left: -15px;margin-right: 0px;">
+                            <label for="xPos" class="col-6 col-sm-2 col-form-label">{{ __("x-position") }}</label>
+                            <select name="xPos" class="form-control col-6 col-sm-4 mb-4">
+                                <option>--</option>
+                                {% for x in range(1, maxPosition.x) %}
+                                    {% set selected = '' %}
+                                    {% if xPos.meta_value == x %}
+                                        {% set selected = 'selected' %}
+                                    {% endif %}
+                                    <option value="{{x}}" {{ selected }}>{{ x }}</option>
+                                {% endfor %}
+                            </select>
+
+                            <label for="yPos" class="col-6 col-sm-2 col-form-label">{{ __("y-position") }}</label>
+                            <select name="yPos" class="form-control col-6 col-sm-4">
+                                <option>--</option>
+                                {% for y in range(1, maxPosition.y) %}
+                                    {% set selected = '' %}
+                                    {% if yPos.meta_value == y %}
+                                        {% set selected = 'selected' %}
+                                    {% endif %}
+                                    <option value="{{y}}" {{ selected }}>{{ y }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {% if (product.tax_id)  %}
+                <div class="form-group row">
+                    <label  class="col-6 col-sm-2 col-form-label">{{ __("calculated-price") }}</label>
+                    <div class=" col-6 col-sm-10 text-right">
+                        <input type="text" readonly class="form-control-plaintext text-right font-weight-bold" value="{{ calculatedPrice|number_format(2, '.', ',') }} CZK">
+                    </div>
+                </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-2 offset-md-10 text-center text-md-right">
+                        <button type="submit" class="btn btn-primary my-1 p-3 mb-5 w-100">{{ __( product.id > -1 ? 'edit-product' : 'add-product' ) }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

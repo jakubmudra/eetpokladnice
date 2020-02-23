@@ -1,0 +1,11 @@
+<tr>
+    <th scope="row">{{ item.id }}</th>
+    <td>{{ item.name }}</td>
+    <td>{{ item.price|number_format(2, '.', ',')  }} CZK</td>
+    <td>{{ __(types[item.type-1].name ) }}</td>
+    <td>{{ productModel.getProductStockQuantity(item.id) }}</td>
+    <td class="d-flex justify-content-end">
+        <button class="btn btn-warning text-white align-self-center m-2" onclick="redirect('/product/edit/{{ item.id }}')"><i class="fas fa-pen"></i></button>
+        <a class="btn btn-danger align-self-center" onclick="return confirm('{{ __("delete-popup") }}');" href="/product/remove/{{ item.id }}"><i class="fas fa-trash"></i></a>
+    </td>
+</tr>

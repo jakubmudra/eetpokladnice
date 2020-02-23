@@ -1,0 +1,16 @@
+<tr>
+    <th scope="row">{{ item.id }}</th>
+    <td>{{ item.name }}</td>
+    <td>{{ item.price|number_format(2, '.', ',')  }} CZK</td>
+    {% if edit %}
+        <td class="d-inline">
+            <input type="number" class="form-control w-25 quantityInput" step="1" min="0" name="{{ item.id }}" value="{{ item.quantity }}">
+      </td>
+        <td class="text-right"> </td>
+    {% else %}
+        <td>{{ item.quantity }}</td>
+        <td class="text-right">
+            <button class="btn btn-warning text-white align-self-center m-2" onclick="redirect('/product/edit/{{ item.id }}')"><i class="fas fa-pen"></i></button>
+        </td>
+    {% endif %}
+</tr>

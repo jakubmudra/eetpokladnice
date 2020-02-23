@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/sale.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">{{ __("app-name") }}</a>
+                {% if userSession %}
+                    <span class="navbar-text">
+                        <a href="">{{ userSession.first_name }} {{ userSession.last_name }}</a>
+                        <a href="/dashboard/logout" class="ml-2"><i class="fas fa-sign-out-alt"></i></a>
+                </span>
+                {% endif %}
+            </div>
+        </nav>
+
+        {{ this.renderView() }}
+
+        <!--Scripts-->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="/assets/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/1fe309948e.js" crossorigin="anonymous"></script>
+        <script src="/assets/js/spinner.js"></script>
+        <script src="/assets/js/main.js"></script>
+        <script src="/assets/js/notify.min.js"></script>
+
+        <script defer>
+            {% for item in messages %}
+            $.notify('{{item[0]}}','({{item[1]}}');
+            {% endfor %}
+        </script>
+
+    </body>
+</html>

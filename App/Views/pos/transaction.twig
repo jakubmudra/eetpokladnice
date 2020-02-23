@@ -1,0 +1,68 @@
+<section class="sale-main container mt-4">
+    <div class="row">
+        <div class="col-4 sale-receipt p-0">
+            <span class="d-none" data-tid="{{ transactionId }}" id="transactionID"></span>
+            <div class="d-flex align-content-end flex-column h-100 p-0">
+                <div class="sale-receipt--receiptId px-3 border-bottom">
+                    <p>Receipt ID: <span class="float-right">{{ receiptId }}</span> </p>
+                </div>
+                <div class="sale-receipt--items">
+                    <table class="w-100">
+                        <thead class="border-bottom px-3">
+                        <tr class="">
+                            <th class="px-3">X</th>
+                            <th>Položka</th>
+                            <th class="px-3">Cena</th>
+                        </tr>
+                        </thead>
+                        <tbody id="CART">
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="sale-receipt--suma mt-auto px-3 py-4">
+                    <p>MEZISOUČET: <span class="float-right" id="SUBTOTAL"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                {{ posRender|raw }}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="modal fade" id="transactionSelectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="transactionSelectModalTitle">{{ __("select-transaction") }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% if transactions|length > 0 %}
+                    <select id="transactionSelectID" class="form-control w-100">
+                        {% for transaction in transactions %}
+                            <option value="{{ transaction.id }}">Transakce ID: {{ transaction.id }}  - {{ transaction.date_time }} - castka {{ transaction.total|number_format(2, '.', ',') }} CZK</option>
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    {{ __("no-transaction") }}
+                {%  endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location.href='/transaction/' + document.getElementById('transactionSelectID').value;">Open</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% if isPos %}
+    <script src="/assets/js/sale.js" defer></script>
+{% endif %}

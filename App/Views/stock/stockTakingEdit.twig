@@ -1,0 +1,30 @@
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1>{{ __("stocktaking") }}</h1>
+            <p class="text-right">{{ __("product-list-showing-products") }} : {{ items|length }} </p>
+            <form method="post">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">{{ __("name") }}</th>
+                            <th scope="col">{{ __("price") }}</th>
+                            <th scope="col">{{ __("quantity") }}</th>
+                        </tr>
+                        </thead>
+                        <tbody id="stock">
+
+                        {% set edit = true %}
+                        {% for item in items %}
+                            {{ include('stock/stockTaking-single.twig') }}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <button type="submit" name="submit" class="btn btn-primary my-1">{{ __("save") }}</button>
+            </form>
+        </div>
+    </div>
+</div>

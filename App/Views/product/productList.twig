@@ -1,0 +1,30 @@
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1>{{ __("product-list-page-title") }}</h1>
+            <div class="row py-2">
+                <div class="col-2 d-flex">  <button class="btn btn-info align-self-center" onclick="redirect('/product/edit')"><i class="fas fa-plus"></i></button> </div>
+                <div class="col d-flex justify-content-end">  <p class="text-right m-0 align-self-center">{{ __("product-list-showing-products") }} : {{ products|length  }} </p> </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ __("name") }}</th>
+                        <th scope="col">{{ __("price") }}</th>
+                        <th scope="col">{{ __("type") }}</th>
+                        <th scope="col">{{ __("on-stock") }}</th>
+                        <th scope="col">{{ __("actions") }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in products %}
+                        {{ include('product/productList-single.twig') }}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

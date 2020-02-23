@@ -1,0 +1,9 @@
+<tr>
+    <th scope="row">{{ item.id }}</th>
+    <td>{{ item.name }}</td>
+    <td class="d-flex justify-content-end">
+        <button title="Inventura" class="btn btn-info text-white align-self-center" onclick="redirect('/stocktaking/{{ item.id }}')"><i class="fas fa-dolly-flatbed"></i></button>
+        <button class="btn btn-warning text-white align-self-center m-2" onclick="redirect('/stock/edit/{{ item.id }}')"><i class="fas fa-pen"></i></button>
+        <a class="btn btn-danger align-self-center" onclick="return confirm('{{ __("delete-popup") }}');" href="/stock/remove/{{ item.id }}"><i class="fas fa-trash"></i></a>
+    </td>
+</tr>

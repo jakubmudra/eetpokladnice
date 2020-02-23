@@ -1,0 +1,120 @@
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1>Nastavení</h1>
+        </div>
+        <div class="col-12">
+            <ul class="nav nav-tabs" id="myForm">
+                <li class="active"><a href="#general">Obecné</a></li>
+                <li><a href="#eet">EET</a></li>
+            </ul>
+        </div>
+        <div class="col-12 mt-5">
+            <form method="post">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="general">
+
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Nazev obchodnika</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="nazev_poplatnika" required  value="{{ settings.nazev_poplatnika }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Adresa</label>
+                            <div class="col-sm-10">
+                                <div class="row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Ulice, č.p.</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="adresa_ulice"  required value="{{ settings.adresa_ulice }}">
+                                    </div>
+
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Město a PSČ</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="adresa_mesto"  required value="{{ settings.adresa_mesto }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Kontakt</label>
+                            <div class="col-sm-10">
+                                <div class="row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Telefon</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="telefon"  required value="{{ settings.telefon }}">
+                                    </div>
+
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" name="email"  required value="{{ settings.email }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">IČ poplatníka</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="ic_obchodnika" pattern="[0-9]{8}$" required value="{{ settings.ic_obchodnika }}">
+                            </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">DIČ poplatníka</label>
+                            <div class="input-group col-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">CZ</div>
+                                </div>
+                                <input type="text" class="form-control" pattern="^[0-9]{8,10}$"  required name="dic_obchodnika"  value="{{ settings.dic_obchodnika }}">
+                            </div>
+
+                            <label for="staticEmail" class="col-sm-2 col-form-label">DIC poverujiciho</label>
+                            <div class="input-group col-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">CZ</div>
+                                </div>
+                                <input type="text" class="form-control" pattern="^CZ[0-9]{8,10}$" name="dic_poverujiciho"  value="{{ settings.dic_poverujiciho }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="eet">
+
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Označení provozovny</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="id_provoz"  pattern="^[1-9][0-9]{0,5}$" required value="{{ settings.id_provoz }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Označení pokladniho zařízení</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="id_pokl" pattern="^[0-9a-zA-Z\.,:;/#\-_ ]{1,20}$" required value="{{ settings.id_pokl}}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Odeslat</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<Script>
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        $('#myForm a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
+    });
+</Script>

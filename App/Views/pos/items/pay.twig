@@ -1,0 +1,5 @@
+<div class="col{% if colSpan %}-{{ colSpan * 2  }}{% endif %} sale-item" >
+    <div onclick="{{ item.data.jsAction }}" id="{{ domId }}" class="sale-item--inner active {{ type }} {{ item.data.color }}" data-x="{{ item.x }}" data-y="{{ item.y }}" {% if colSpan %}data-span="{{ colSpan }} "{% endif %} >
+        <p class="w-100">{{ item.data.value }}</p>
+    </div>
+</div>

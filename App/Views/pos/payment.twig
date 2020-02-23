@@ -1,0 +1,113 @@
+<section class="sale-main container mt-4">
+    <div class="row">
+        <div class="col-4 sale-receipt p-0">
+            <span class="d-none" data-tid="{{ transactionId }}" id="transactionID"></span>
+            <div class="d-flex align-content-end flex-column h-100 p-0">
+                <div class="sale-receipt--receiptId px-3 border-bottom">
+                    <p>Receipt ID: <span class="float-right">{{ receiptId }}</span> </p>
+                </div>
+                <div class="sale-receipt--items">
+                    <table class="w-100">
+                        <thead class="border-bottom px-3">
+
+                        </thead>
+                        <tbody>
+                            <tr style="line-height: 3">
+                                <td>Mezisoucet:</td>
+                                <td><span class="float-right h6" id="SUBTOTAL"></span></td>
+                            </tr>
+                            <tr style="line-height: 3">
+                                <td>Zaokrouhleni:</td>
+                                <td><span class="float-right" id="rounding"></span></td>
+                            </tr>
+
+                            <tr style="line-height: 3">
+                                <td class="font-weight-bold">Celkem:</td>
+                                <td><span class="float-right font-weight-bold" id="totalLine"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Platebni metody:</td>
+                            </tr>
+                        </tbody>
+                        <tbody  id="paymentMethods">
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="sale-receipt--suma mt-auto px-3 py-4">
+                    <p>Zbyva: <span class="float-right returnValue" id="return"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                {{ posRender|raw }}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="modal fade" id="discountModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="transactionSelectModalTitle">Nastaveni slevy</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <label class="col-sm-5">Procentualni sleva</label>
+                    <input type="number" class="col-sm-6 form-control" min="0" max="100" step="0.1"  id="discountInput" placeholder="procentualni sleva">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success"  onclick="authorizeDiscount();" data-dismiss="modal">Nastavit</button>
+                <button type="button" class="btn btn-secondary"  data-dismiss="modal">Zrusit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="transactionComplete" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="transactionSelectModalTitle">Ukončení objednávky</h5>
+                <button type="button" id="closeEETModal1" disabled class="close" onclick="redirect('/transaction/new')" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h4>K vraceni:  <span class="returnValue"></span></h4>
+                    </div>
+                    <div class="col-12 text-center" id="loader_wrapper">
+                        <div class="loader"></div>
+                        <p class="text-muted">Vyčkejte prosím na odpověď EET serveru</p>
+                        <p class="text-muted">Pokud server neodpovi do 1 minuty, provedte platbu znovu, pripadne kontaktujte podporu.</p>
+                    </div>
+                    <div class="col-12" id="eet_report" >
+                        <h5 class="text-center">Odpoved EET</h5>
+                        <p>Stav transakce:   Odeslana</p>
+                        <p>Cas zaevidovani:  <span id="dat_trzby"></span></p>
+                        <p class="font-weight-bold" id="fik_wrapper">Kod FIK: <span class="text-muted" id="fik"></span> </p>
+                        <p class="font-weight-bold">Kod BKP: <span class="text-muted" id="bkp"></span> </p>
+                        <p class="d-flex font-weight-bold" id="pkp_wrapper">Kod PKP: <textarea id="pkp" class="text-muted" style="width: 80%"></textarea> </p>
+                        <button class="btn btn-info"><i class="fas fa-print"></i> Tisk uctenky</button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="redirect('/transaction/new')" disabled data-dismiss="modal" id="closeEETModal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% if isPos %}
+    <script src="/assets/js/sale.js" defer></script>
+{% endif %}

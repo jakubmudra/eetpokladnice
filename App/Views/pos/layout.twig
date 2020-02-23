@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>{{ __("cash-register") }}</h2>
+            <a href="#" data-toggle="modal" data-target="#transactionSelectModal">Otevrit transakci</a>
+            <a href="/transaction/new">Nova transakce</a>
+            {{ self.renderView() }}
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="transactionSelectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="transactionSelectModalTitle">{{ __("select-transaction") }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {% if transactions|length > 0 %}
+                <select id="transactionID" class="form-control w-100">
+                        {% for transaction in transactions %}
+                            <option value="{{ transaction.id }}">Transakce ID: {{ transaction.id }}  - {{ transaction.date_time }} - castka {{ transaction.total|number_format(2, '.', ',') }} CZK</option>
+                        {% endfor %}
+                </select>
+                {% else %}
+                    {{ __("no-transaction") }}
+                {%  endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location.href='/transaction/' + document.getElementById('transactionID').value;">Open</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+{
+    "require": {
+        "twig/twig": "^3.0",
+        "twig/intl-extra": "^3.0",
+        "symfony/intl": "^5.0",
+        "mpdf/mpdf": "^8.0",
+      "ext-json": "*",
+        "symfony/twig-bridge": "^5.0",
+        "filipsedivy/php-eet": "^4.2"
+    }
+}

@@ -1,6 +1,6 @@
 # EETPOKLADNICE
 
-EET Pokladnice je můj maturitní projekt, vytvořený v únoru 2020.
+EET Pokladnice je můj maturitní projekt, vytvořený v únoru 2020. Celý projekt byl napsán během 12 dnů, a to včetně docházení do školy od 8 do 16:00
 
 ## Požadavky
 - PHP 7.4.x a vyšší
